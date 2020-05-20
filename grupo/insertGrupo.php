@@ -4,7 +4,6 @@ $response = array();
 
 $Cn = mysqli_connect("localhost","root","","escuela")or die ("server no encontrado");
 mysqli_set_charset($Cn,"utf8");
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $objArray = json_decode(file_get_contents("php://input"),true);
     if (empty($objArray))
@@ -15,17 +14,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode($response);
     }
     else{
-         $idmateria=$objArray['id_materia']; 
-        $nommateria=$objArray['nom_materia'];
-        $result = mysqli_query($Cn,"UPDATE materia SET nom_materia='$nommateria' WHERE id_materia='$idmateria'");
+        $grupo=$objArray['grupo']; 
+        $nocontrol=$objArray['nocontrol'];
+        $materiaid=$objArray['materiaid'];
+        $docenteid=$objArray['docenteid'];
+
+
+
+        $result = mysqli_query($Cn,"INSERT INTO grupo(grupo,nocontrol,materiaid,docenteid) values 
+        ('$grupo','$nocontrol','$materiaid','$docenteid')");
+
         if ($result) {   
             $response["success"] = 200;   // El success=200 es que encontro eñ producto
-            $response["message"] = "Materia Actualizada";
+            $response["message"] = "Grupo Insertada";
             // codifica la información en formato de JSON response
             echo json_encode($response);
         } else {
                 $response["success"] = 406;  
-                $response["message"] = "La materia no se actualizo";
+                $response["message"] = "Grupo no Insertado";
                 echo json_encode($response);
         }
     }

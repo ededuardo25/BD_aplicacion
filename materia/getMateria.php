@@ -3,7 +3,7 @@ $response = array();
 $Cn = mysqli_connect("localhost","root","","escuela")or die ("server no encontrado");
 mysqli_set_charset($Cn,"utf8");
 // Checa que le esté llegando por el método POST el idProd
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $objArray = json_decode(file_get_contents("php://input"),true);
     $idmateria=$objArray['id_materia'];
     $result = mysqli_query($Cn,"SELECT id_materia,nom_materia from materia WHERE id_materia = '$idmateria'");

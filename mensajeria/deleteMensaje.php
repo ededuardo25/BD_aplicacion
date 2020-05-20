@@ -15,17 +15,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode($response);
     }
     else{
-         $idmateria=$objArray['id_materia']; 
-        $nommateria=$objArray['nom_materia'];
-        $result = mysqli_query($Cn,"UPDATE materia SET nom_materia='$nommateria' WHERE id_materia='$idmateria'");
+        $mensaje=$objArray['id_mensaje']; 
+        $result = mysqli_query($Cn,"DELETE FROM mensajes WHERE id_mensaje='$mensaje'");
         if ($result) {   
             $response["success"] = 200;   // El success=200 es que encontro eñ producto
-            $response["message"] = "Materia Actualizada";
+            $response["message"] = "Materia Eliminada";
             // codifica la información en formato de JSON response
             echo json_encode($response);
         } else {
+                // 
                 $response["success"] = 406;  
-                $response["message"] = "La materia no se actualizo";
+                $response["message"] = "La Materia no se Elimino";
                 echo json_encode($response);
         }
     }

@@ -4,7 +4,7 @@ $response = array();
 $Cn = mysqli_connect("localhost","root","","escuela")or die ("server no encontrado");
 mysqli_set_charset($Cn,"utf8");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $result = mysqli_query($Cn,"SELECT no_control,nom_alumno,semestre,password FROM alumno ORDER BY nom_alumno");
     if (!empty($result)) {
         if (mysqli_num_rows($result) > 0) { 
@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $response["alumnos"] = array();
             while ($res = mysqli_fetch_array($result)){
                 $alumno = array();
+                
                 $alumno["no_control"] = $res["no_control"];
                 $alumno["nom_alumno"] = $res["nom_alumno"];
                 $alumno["semestre"] = $res["semestre"];

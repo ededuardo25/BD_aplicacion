@@ -1,3 +1,4 @@
+
 <?php
 
 $response = array();
@@ -15,17 +16,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode($response);
     }
     else{
-         $idmateria=$objArray['id_materia']; 
-        $nommateria=$objArray['nom_materia'];
-        $result = mysqli_query($Cn,"UPDATE materia SET nom_materia='$nommateria' WHERE id_materia='$idmateria'");
+         $id_grupo=$objArray['id_grupo']; 
+         $grupo=$objArray['grupo'];
+         $nocontrol=$objArray['nocontrol'];
+         $materiaid=$objArray['materiaid'];
+         $docenteid=$objArray['docenteid'];
+        $result = mysqli_query($Cn,"UPDATE grupo SET grupo='$grupo',nocontrol='$nocontrol',materiaid='$materiaid',docenteid='$docenteid' WHERE id_grupo='$id_grupo'");
         if ($result) {   
             $response["success"] = 200;   // El success=200 es que encontro eñ producto
-            $response["message"] = "Materia Actualizada";
+            $response["message"] = "Grupo Actualizado";
             // codifica la información en formato de JSON response
             echo json_encode($response);
         } else {
                 $response["success"] = 406;  
-                $response["message"] = "La materia no se actualizo";
+                $response["message"] = "El Grupo no se actualizo";
                 echo json_encode($response);
         }
     }

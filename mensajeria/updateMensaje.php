@@ -15,9 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode($response);
     }
     else{
-         $idmateria=$objArray['id_materia']; 
-        $nommateria=$objArray['nom_materia'];
-        $result = mysqli_query($Cn,"UPDATE materia SET nom_materia='$nommateria' WHERE id_materia='$idmateria'");
+         $id_mensaje=$objArray['id_mensaje']; 
+        $Emisor=$objArray['Emisor'];
+        $Receptor=$objArray['Receptor'];
+        $Mensaje=$objArray['Mensaje'];
+        $result = mysqli_query($Cn,"UPDATE mensajes SET Emisor='$Emisor',Receptor='$Receptor' ,Mensaje='$Mensaje' WHERE id_mensaje='$id_mensaje'");
         if ($result) {   
             $response["success"] = 200;   // El success=200 es que encontro eñ producto
             $response["message"] = "Materia Actualizada";
